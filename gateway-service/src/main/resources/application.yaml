@@ -3,15 +3,6 @@ spring:
     name: gateway-service
   main:
     web-application-type: reactive
-  cloud:
-    gateway:
-      routes:
-        - id: customer
-          uri: lb://CUSTOMER
-          predicates:
-            - Path=/customer/**
-          filters:
-            - StripPrefix=1
 server:
   port: 8083
 eureka:
