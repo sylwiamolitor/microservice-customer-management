@@ -1,4 +1,4 @@
-package org.sylwia;
+package org.sylwia.getawayservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

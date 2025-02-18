@@ -1,4 +1,4 @@
-package org.sylwia;
+package org.sylwia.getawayservice;
 
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
