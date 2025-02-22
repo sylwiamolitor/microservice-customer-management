@@ -1,22 +1,4 @@
 services:
-  gateway-service:
-    image: gateway-service
-    build:
-      context: gateway-service/.
-      dockerfile: Dockerfile
-    ports:
-      - "8083:8083"
-    environment:
-      - SPRING_APPLICATION_NAME=gateway-service
-      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=true
-      - EUREKA_CLIENT_FETCH_REGISTRY=true
-      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka-service:8761/eureka
-      - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=*
-
-    depends_on:
-      - eureka-service
-    networks:
-      - postgres
   eureka-service:
     image: eureka-server
     build:
@@ -30,20 +12,19 @@ services:
       - EUREKA_CLIENT_FETCH_REGISTRY=false
       - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
       - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
-
     networks:
       - postgres
   postgres:
+    image: postgres:latest
     container_name: postgres
-    image: postgres
     environment:
-      POSTGRES_USER: ${POSTGRES_USERNAME}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      PGDATA: /data/postgres
-    volumes:
-      - postgres:/data/postgres
+       - POSTGRES_USER=${DATABASE_USERNAME}
+       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+       - POSTGRES_DB=${DATABASE_NAME}
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - postgres
     restart: unless-stopped
@@ -61,10 +42,44 @@ services:
     networks:
       - postgres
     restart: unless-stopped
-
+  customer:
+    image: customer
+    build:
+      context: customer/.
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    environment:
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_URL=jdbc:postgresql://postgres:5432
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - EUREKA_URL=http://eureka-service:8761/eureka
+    depends_on:
+      - postgres
+      - eureka-service
+    networks:
+      - postgres
+  gateway-service:
+    image: gateway-service
+    build:
+      context: gateway-service/.
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_APPLICATION_NAME=gateway-service
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=true
+      - EUREKA_CLIENT_FETCH_REGISTRY=true
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka-service:8761/eureka
+      - MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=*
+    depends_on:
+      - eureka-service
+    networks:
+      - postgres
 networks:
   postgres:
     driver: bridge
 volumes:
-  postgres:
+  postgres_data:
   pgadmin:
