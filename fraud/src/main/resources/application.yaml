@@ -7,8 +7,8 @@ spring:
     name: fraud
   datasource:
     driverClassName: org.postgresql.Driver
-    username: ${POSTGRES_USERNAME}
-    url: ${DATABASE_URL}/fraud
+    username: ${DATABASE_USERNAME}
+    url: ${DATABASE_URL}/${DATABASE_NAME}
     password: ${DATABASE_PASSWORD}
   jpa:
     properties:
@@ -27,5 +27,3 @@ eureka:
       defaultZone: ${EUREKA_URL}
     fetch-registry: true
     register-with-eureka: true
-  instance:
-    preferIpAddress: true

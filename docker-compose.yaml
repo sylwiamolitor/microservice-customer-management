@@ -58,6 +58,25 @@ services:
     depends_on:
       - postgres
       - eureka-service
+      - fraud
+    networks:
+      - postgres
+  fraud:
+    image: fraud
+    build:
+      context: fraud/.
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_URL=jdbc:postgresql://postgres:5432
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - EUREKA_URL=http://eureka-service:8761/eureka
+    depends_on:
+      - postgres
+      - eureka-service
     networks:
       - postgres
   gateway-service:

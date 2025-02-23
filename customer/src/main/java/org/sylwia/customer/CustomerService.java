@@ -32,7 +32,7 @@ public class CustomerService {
         customerRepository.saveAndFlush(customer);
 
         FraudCheckHistoryResponse fraudCheckHistoryResponse = restTemplate.getForObject(
-                "http://FRAUD/api/v1/fraud-check/{customerId}",
+                "http://fraud/api/v1/fraud-check/{customerId}",
                 FraudCheckHistoryResponse.class,
                 customer.getId()
         );
