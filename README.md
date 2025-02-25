@@ -1,5 +1,5 @@
-# Microservices application
-An application using Microservices, Service Discovery, Load Balancer, Spring Cloud, Eureka and Spring Boot.
+# Microservices Application
+This repository hosts a microservices-based application utilizing Service Discovery, Load Balancing, Spring Cloud, Spring Cloud Gateway, Eureka, and Spring Boot. The project serves as a practical implementation to enhance understanding and skills in microservices architecture.
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -13,37 +13,64 @@ An application using Microservices, Service Discovery, Load Balancer, Spring Clo
 
 
 ## General Information
-This project was made to practice microservices.
+This project was developed as a hands-on exercise in microservices, demonstrating key architectural principles and patterns.
 
 ## Technologies Used
-Java, Eureka server, Docker, Spring, OpenAPI.
-
+- **Java**
+- **Eureka Server**
+- **Docker**
+- **Spring Framework**
+- **OpenAPI**
+- **Spring Cloud Gateway**
 
 ## Features
-- Sending a request to create a customer,
-- checking if the email is correct,
-- checking if the email is taken,
+- Create a customer through a RESTful API.
+- Validate email format and check for duplicate email addresses.
 
 
 ## Screenshots
-![img.png](img.png)
-![img_1.png](img_1.png)
+![Customer Creation Screenshot](img_1.png)
+![Fraud Check Screenshot](img_2.png)
 
 ## Setup
-Define global environment variables called `DATABASE_URL`, `POSTGRES_USERNAME`, `DATABASE_PASSWORD`, `DATABASE_NAME` and `EUREKA_URL`.
-Database credentials are needed for the application to function.
-To start the application use command `docker compose up`, start EurekaServerApplication, CustomerApplication and FraudApplication - in that order.
+Before running the application, define the following global environment variables:
+- `DATABASE_URL`: The URL for connecting to the database (e.g., `jdbc:postgresql://localhost:5432`).
+- `DATABASE_USERNAME`: The username for the database.
+- `DATABASE_PASSWORD`: The password for the database.
+- `DATABASE_NAME`: The name of the database.
 
+Ensure that the database credentials are correct for the application to function properly.
+
+To start the application, build all JAR files and execute the following command:
+
+```bash
+docker-compose up --build
+```
 
 ## Usage
-Application can be used as a simple model of microservices.
-POST request on http://localhost:8080/api/v1/customers - example: ![img.png](img.png)
-can be used to create a customer. Then http://localhost:8081/api/v1/fraud-check/{customerId} can be used to check if customer is a fraud.
-OpenAPI option:
-- http://localhost:8080/swagger-ui/index.html
-- http://localhost:8081/swagger-ui/index.html
+This application can be utilized as a basic model of microservices.
+
+- To create a customer, send a POST request to:
+  ```
+  http://localhost:8090/api/v1/customers
+  ```
+
+- To check if a customer is flagged as fraudulent, use the following endpoint:
+  ```
+  http://localhost:8090/api/v1/fraud-check/{customerId}
+  ```
+
+Additionally, you can access the API documentation via OpenAPI at:
+```
+http://localhost:8090/swagger-ui/index.html
+```
+
 ## Project Status
-In progress.
+The project is currently **completed**.
 
 ## Room for Improvement
-Full dockerization
+
+Potential extensions could include:
+
+    Adding new functionalities and features.
+    Implementing additional microservices for more complex operations.
