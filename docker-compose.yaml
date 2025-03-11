@@ -104,6 +104,17 @@ services:
     networks:
       - postgres
 
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    restart: always
+    networks:
+      - postgres
+
 networks:
   postgres:
     driver: bridge
@@ -111,3 +122,4 @@ networks:
 volumes:
   postgres_data:
   pgadmin:
+  jenkins_home:
