@@ -29,8 +29,8 @@ This project was developed as a hands-on exercise in microservices, demonstratin
 - Basic fraud-check microservice example.
 
 ## Screenshots
-![Customer Creation Screenshot](img_1.png)
-![Fraud Check Screenshot](img_2.png)
+![Customer Creation Screenshot](images/img_1.png)
+![Fraud Check Screenshot](images/img_2.png)
 
 ## Setup
 Before running the application, set the following environment variables (example values shown):
