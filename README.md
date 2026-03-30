@@ -1,8 +1,11 @@
 # Microservices Application
 
-This repository hosts a microservices-based application using Service Discovery, Load Balancing, Spring Cloud, Spring Cloud Gateway, Eureka, and Spring Boot. The project is a practical implementation to demonstrate microservices architecture patterns.
+This repository hosts a microservices-based application using Service Discovery, Load Balancing, Spring Cloud, Spring
+Cloud Gateway, Eureka, and Spring Boot. The project is a practical implementation to demonstrate microservices
+architecture patterns.
 
 ## Table of Contents
+
 - [General Information](#general-information)
 - [Technologies Used](#technologies-used)
 - [Features](#features)
@@ -13,9 +16,12 @@ This repository hosts a microservices-based application using Service Discovery,
 - [Room for Improvement](#room-for-improvement)
 
 ## General Information
-This project was developed as a hands-on exercise in microservices, demonstrating key architectural principles and patterns.
+
+This project was developed as a hands-on exercise in microservices, demonstrating key architectural principles and
+patterns.
 
 ## Technologies Used
+
 - Java
 - Eureka Server
 - Docker
@@ -24,15 +30,18 @@ This project was developed as a hands-on exercise in microservices, demonstratin
 - Spring Cloud Gateway
 
 ## Features
+
 - Create a customer via a RESTful API.
 - Validate email format and check for duplicate email addresses.
 - Basic fraud-check microservice example.
 
 ## Screenshots
+
 ![Customer Creation Screenshot](images/img_1.png)
 ![Fraud Check Screenshot](images/img_2.png)
 
 ## Setup
+
 Before running the application, set the following environment variables (example values shown):
 
 - `DATABASE_URL`: JDBC URL for the database, e.g. `jdbc:postgresql://localhost:5432/your_db`
@@ -43,12 +52,15 @@ Before running the application, set the following environment variables (example
 Ensure the database is accessible and credentials are correct.
 
 To build and start the application using Docker Compose (from the repository root):
+
 ```bash
 docker-compose up --build
 ```
+
 This will build the project images and start the services defined in `docker-compose.yml`.
 
 ## Usage
+
 - Create a customer (POST):
   http://localhost:8090/api/v1/customers
 
@@ -59,10 +71,13 @@ This will build the project images and start the services defined in `docker-com
   http://localhost:8090/swagger-ui/index.html
 
 ## Project Status
+
 The project is currently completed.
 
 ## Room for Improvement
+
 Potential extensions:
+
 - Add more microservices and inter-service communication examples.
 - Implement distributed tracing and centralized logging.
 - Add automated tests and CI/CD pipeline.

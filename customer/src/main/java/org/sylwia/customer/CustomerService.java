@@ -24,17 +24,17 @@ public class CustomerService {
         checkIfEmailTaken(email);
 
         Customer customer = Customer.builder()
-                .firstName(customerRegistrationRequest.firstName())
-                .lastName(customerRegistrationRequest.lastName())
-                .email(customerRegistrationRequest.email())
-                .build();
+            .firstName(customerRegistrationRequest.firstName())
+            .lastName(customerRegistrationRequest.lastName())
+            .email(customerRegistrationRequest.email())
+            .build();
 
         customerRepository.saveAndFlush(customer);
 
         FraudCheckHistoryResponse fraudCheckHistoryResponse = restTemplate.getForObject(
-                "http://fraud/api/v1/fraud-check/{customerId}",
-                FraudCheckHistoryResponse.class,
-                customer.getId()
+            "http://fraud/api/v1/fraud-check/{customerId}",
+            FraudCheckHistoryResponse.class,
+            customer.getId()
         );
         assert fraudCheckHistoryResponse != null;
         if (fraudCheckHistoryResponse.fraudster()) {
