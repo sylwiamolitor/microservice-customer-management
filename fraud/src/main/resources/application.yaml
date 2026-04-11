@@ -6,15 +6,15 @@ spring:
   application:
     name: fraud
   datasource:
-    driverClassName: org.postgresql.Driver
+    driver-class-name: org.postgresql.Driver
     username: ${DATABASE_USERNAME}
-    url: ${DATABASE_URL}/${DATABASE_NAME}
+    url: ${DATABASE_URL}
     password: ${DATABASE_PASSWORD}
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: 'true'
+        format_sql: true
         default_schema: public
     hibernate:
       ddl-auto: update

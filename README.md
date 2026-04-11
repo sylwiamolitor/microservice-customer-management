@@ -42,23 +42,27 @@ patterns.
 
 ## Setup
 
-Before running the application, set the following environment variables (example values shown):
+Create a .env file in the root of the project (you can copy from .env.example if available) and define the following variables:
 
-- `DATABASE_URL`: JDBC URL for the database, e.g. `jdbc:postgresql://localhost:5432/your_db`
-- `DATABASE_USERNAME`: Database username (e.g., `postgres`)
-- `DATABASE_PASSWORD`: Database password
-- (Optional) `DATABASE_NAME`: Database name if used separately in your configuration
+- `DATABASE_URL`: Full JDBC connection string for PostgreSQL
+  e.g. `jdbc:postgresql://postgres:5432/customer`
+- `DATABASE_USERNAME`: PostgreSQL username (e.g., `postgres`)
+- `DATABASE_PASSWORD`: PostgreSQL password
+- `POSTGRES_DB`: Name of the database created in PostgreSQL
+  (must match the database name used inside `DATABASE_URL`)
+- `EUREKA_URL`: Eureka service URL used by all microservices (e.g., `http://eureka-service:8761/eureka`)
 
-Ensure the database is accessible and credentials are correct.
-
-To build and start the application using Docker Compose (from the repository root):
-
+Ensure all values are consistent across services and that the database container is reachable before starting the applications.
 ```bash
-docker-compose up --build
+docker compose --env-file .env up --build
 ```
 
-This will build the project images and start the services defined in `docker-compose.yml`.
+This command will:
 
+- Build all service images
+- Start PostgreSQL, Eureka, and microservices
+- Inject environment variables from `.env`
+- Connect all services through the Docker network
 ## Usage
 
 - Create a customer (POST):

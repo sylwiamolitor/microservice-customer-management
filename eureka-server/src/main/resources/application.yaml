@@ -9,4 +9,4 @@ eureka:
     fetch-registry: false
     register-with-eureka: false
   instance:
-    preferIpAddress: true
+    prefer-ip-address: true
