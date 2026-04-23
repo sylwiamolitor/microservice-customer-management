@@ -1,5 +1,5 @@
 FROM openjdk:26-ea-jdk-slim
 WORKDIR /app
-COPY /target/customer-3.5.6.jar app.jar
+COPY target/customer-1.1-SNAPSHOT.jar customer.jar
 EXPOSE 8090
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "customer.jar"]

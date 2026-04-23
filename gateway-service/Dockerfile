@@ -1,5 +1,5 @@
 FROM openjdk:26-ea-jdk-slim
 WORKDIR /app
-COPY target/gateway-service-3.5.6.jar app.jar
+COPY target/gateway-service-1.1-SNAPSHOT.jar gateway-service.jar
 EXPOSE 8083
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "gateway-service.jar"]

@@ -1,5 +1,6 @@
 services:
   eureka-service:
+    container_name: eureka-service
     image: eureka-server
     build:
       context: ./eureka-server
@@ -11,7 +12,7 @@ services:
       - backend
 
   postgres:
-    image: postgres:latest
+    image: postgres:18
     container_name: postgres
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
@@ -20,7 +21,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
     networks:
       - backend
     restart: unless-stopped
@@ -40,16 +41,14 @@ services:
       - backend
 
   customer:
+    container_name: customer
     image: customer
     build:
       context: ./customer
     ports:
       - "8090:8090"
-    environment:
-      SPRING_DATASOURCE_URL: ${DATABASE_URL}
-      SPRING_DATASOURCE_USERNAME: ${DATABASE_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD}
-      EUREKA_URL: ${EUREKA_URL}
+    env_file:
+      - .env
     depends_on:
       - postgres
       - eureka-service
@@ -58,16 +57,14 @@ services:
       - backend
 
   fraud:
+    container_name: fraud
     image: fraud
     build:
       context: ./fraud
     ports:
       - "8081:8081"
-    environment:
-      SPRING_DATASOURCE_URL: ${DATABASE_URL}
-      SPRING_DATASOURCE_USERNAME: ${DATABASE_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD}
-      EUREKA_URL: ${EUREKA_URL}
+    env_file:
+      - .env
     depends_on:
       - postgres
       - eureka-service
@@ -75,14 +72,14 @@ services:
       - backend
 
   gateway-service:
+    container_name: gateway-service
     image: gateway-service
     build:
       context: ./gateway-service
     ports:
       - "8083:8083"
-    environment:
-      SPRING_APPLICATION_NAME: gateway-service
-      EUREKA_URL: ${EUREKA_URL}
+    env_file:
+      - .env
     depends_on:
       - eureka-service
     networks:
