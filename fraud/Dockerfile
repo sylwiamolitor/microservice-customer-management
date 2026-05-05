@@ -1,4 +1,4 @@
-FROM openjdk:26-ea-jdk-slim
+FROM eclipse-temurin:26-jre-alpine
 WORKDIR /app
 COPY target/fraud-1.1-SNAPSHOT.jar fraud.jar
 EXPOSE 8081

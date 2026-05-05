@@ -1,4 +1,4 @@
-FROM openjdk:26-ea-jdk-slim
+FROM eclipse-temurin:26-jre-alpine
 WORKDIR /app
 COPY target/gateway-service-1.1-SNAPSHOT.jar gateway-service.jar
 EXPOSE 8083
